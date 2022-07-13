@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "791268023800",
+    "project_id": "modern-ecommerce-flutter",
+    "storage_bucket": "modern-ecommerce-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791268023800:android:1a46ff6f0e8399064c8a0d",
+        "android_client_info": {
+          "package_name": "com.official.modern_ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791268023800-ernhqrvb39c4pk2k9b7oev0l9l1nafbu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.official.modern_ecommerce",
+            "certificate_hash": "20c379568fc1d611b2732bb95845c3ea78415f8f"
+          }
+        },
+        {
+          "client_id": "791268023800-6okchdfpncdpai4j4t3hm3nkpn4d4tus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2UqoymAI-qc2_OYUjuyNuDFtWBcqoZ5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791268023800-6okchdfpncdpai4j4t3hm3nkpn4d4tus.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
