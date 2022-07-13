@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
@@ -10,8 +11,10 @@ import 'package:modern_ecommerce/utils/scaffold_message_handler.dart';
 import 'package:modern_ecommerce/utils/validation_functions.dart';
 import 'package:modern_ecommerce/widgets/buttons/auth_button_widget.dart';
 import 'package:modern_ecommerce/widgets/buttons/custom_icon_button_widget.dart';
+import 'package:modern_ecommerce/widgets/custom_image_picker_widget.dart';
 import 'package:modern_ecommerce/widgets/custom_textfield_widget.dart';
 import 'package:modern_ecommerce/static/social_login_buttons_widget.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -24,12 +27,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _nameCtrl = TextEditingController();
-  TextEditingController _passCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _passCtrl = TextEditingController();
+  late String profileImg;
+  late String _id;
+  bool isLoading = false;
 
   XFile? _imageFile;
-  dynamic _pickedImageError;
+
+  CollectionReference users =
+      FirebaseFirestore.instance.collection(userCollection);
 
   void _pickImageFromCamera() async {
     try {
@@ -43,10 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _imageFile = pickImage;
       });
     } catch (e) {
-      setState(() {
-        _pickedImageError = e;
-      });
-      print(_pickedImageError);
+      setState(() {});
     }
   }
 
@@ -62,10 +67,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _imageFile = pickImage;
       });
     } catch (e) {
+      setState(() {});
+    }
+  }
+
+  void signUp() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      if (_imageFile != null) {
+        try {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: _emailCtrl.text, password: _passCtrl.text);
+          _id = FirebaseAuth.instance.currentUser!.uid;
+
+          // upload profile pic to firebase storage
+          firebase_storage.Reference ref =
+              firebase_storage.FirebaseStorage.instance.ref('users/$_id.jpg');
+          await ref.putFile(File(_imageFile!.path));
+          profileImg = await ref.getDownloadURL();
+
+          // adding data in firebase firestore
+          users.doc(_id).set({
+            id: _id,
+            names: _nameCtrl.text,
+            emails: _emailCtrl.text,
+            profileImgC: profileImg,
+            phone: null,
+            address: null,
+          });
+
+          _formKey.currentState!.reset();
+          setState(() {
+            _imageFile = null;
+          });
+
+          Navigator.pushReplacementNamed(context, homeR);
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'email-already-in-use') {
+            setState(() {
+              isLoading = false;
+            });
+            MessageHandler.showSnackBar(_scaffoldKey, alreadyEmail);
+          }
+        }
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        MessageHandler.showSnackBar(_scaffoldKey, validImage);
+      }
+    } else {
       setState(() {
-        _pickedImageError = e;
+        isLoading = false;
       });
-      print(_pickedImageError);
+      MessageHandler.showSnackBar(_scaffoldKey, validAllFields);
     }
   }
 
@@ -127,48 +184,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             File(_imageFile!.path),
                                           ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                          color: primaryColor,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            topRight: Radius.circular(15),
-                                          ),
-                                        ),
-                                        child: IconButton(
-                                          onPressed: () {
-                                            _pickImageFromCamera();
-                                          },
-                                          color: white,
-                                          icon: const Icon(
-                                            Icons.camera,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                          color: primaryColor,
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(15),
-                                            bottomRight: Radius.circular(15),
-                                          ),
-                                        ),
-                                        child: IconButton(
-                                          onPressed: () {
-                                            _pickImageFromGallery();
-                                          },
-                                          color: white,
-                                          icon: const Icon(
-                                            Icons.image,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  CustomImagePickerWidget(
+                                    pickCamera: _pickImageFromCamera,
+                                    pickGallery: _pickImageFromGallery,
                                   ),
                                 ],
                               ),
@@ -200,23 +218,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              AuthButton(
-                                label: signup,
-                                onPress: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    if (_imageFile != null) {
-                                      print('image');
-                                    } else {
-                                      MessageHandler.showSnackBar(
-                                          _scaffoldKey, validImage);
-                                    }
-                                  } else {
-                                    MessageHandler.showSnackBar(
-                                        _scaffoldKey, validAllFields);
-                                  }
-                                },
+                              isLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
+                                    )
+                                  : AuthButton(
+                                      label: signup,
+                                      onPress: () {
+                                        signUp();
+                                      },
+                                    ),
+                              const SizedBox(
+                                height: 20,
                               ),
                               const SocialLoginButtons(),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               SizedBox(
                                 height: 60,
                                 child: CustomIconButton(

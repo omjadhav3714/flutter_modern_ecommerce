@@ -6,10 +6,10 @@ class SellerMainPage extends StatefulWidget {
   const SellerMainPage({Key? key}) : super(key: key);
 
   @override
-  State<SellerMainPage> createState() => _HomePageState();
+  State<SellerMainPage> createState() => _SellerMainPageState();
 }
 
-class _HomePageState extends State<SellerMainPage> {
+class _SellerMainPageState extends State<SellerMainPage> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {

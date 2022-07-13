@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
@@ -19,9 +20,44 @@ class SellerLoginScreen extends StatefulWidget {
 
 class _SellerLoginScreenState extends State<SellerLoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _passCtrl = TextEditingController();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
+      GlobalKey<ScaffoldMessengerState>();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passCtrl = TextEditingController();
+  bool isLoading = false;
+
+  void sellerSignIn() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _emailCtrl.text, password: _passCtrl.text);
+
+        _formKey.currentState!.reset();
+        Navigator.pushReplacementNamed(context, sellerHome);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          setState(() {
+            isLoading = false;
+          });
+          MessageHandler.showSnackBar(_scaffoldKey, userNotFound);
+        } else if (e.code == 'wrong-password') {
+          setState(() {
+            isLoading = false;
+          });
+          MessageHandler.showSnackBar(_scaffoldKey, wrongPass);
+        }
+      }
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+      MessageHandler.showSnackBar(_scaffoldKey, validAllFields);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,18 +119,19 @@ class _SellerLoginScreenState extends State<SellerLoginScreen> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              AuthButton(
-                                label: signin,
-                                color: black,
-                                onPress: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    print('Validated');
-                                  } else {
-                                    MessageHandler.showSnackBar(
-                                        _scaffoldKey, validAllFields);
-                                  }
-                                },
-                              ),
+                              isLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
+                                    )
+                                  : AuthButton(
+                                      label: signin,
+                                      color: black,
+                                      onPress: () {
+                                        sellerSignIn();
+                                      },
+                                    ),
                               const SizedBox(
                                 height: 20,
                               ),
@@ -108,7 +145,8 @@ class _SellerLoginScreenState extends State<SellerLoginScreen> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const LoginScreen(),
+                                        builder: (context) =>
+                                            const LoginScreen(),
                                       ),
                                     );
                                   },
@@ -118,7 +156,8 @@ class _SellerLoginScreenState extends State<SellerLoginScreen> {
                                 height: 20,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextButton(
                                     onPressed: () {

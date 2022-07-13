@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/lists.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
 import 'package:modern_ecommerce/widgets/appbar_title_widget.dart';
+import 'package:modern_ecommerce/widgets/custom_dialogs.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -25,8 +27,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/');
+            onPressed: () async {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: CustomConfirmDialog(
+                    title: logout,
+                    subtitle: sureLogout,
+                    icon: Icons.logout,
+                    onYesPressed: () async {
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacementNamed(context, initial);
+                    },
+                  ),
+                ),
+              );
             },
             icon: const Icon(
               Icons.logout,

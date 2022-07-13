@@ -19,8 +19,11 @@ class CustomImageButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(white),
       ),
       onPressed: onPress,
-      child: Row(
+      child:  Column(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           CircleAvatar(
             backgroundColor: white,
             radius: 20,
@@ -29,12 +32,15 @@ class CustomImageButton extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 10,
+            height: 5,
           ),
           Text(
             label,
             style: const TextStyle(fontSize: 15, color: black),
-          )
+          ),
+          const SizedBox(
+            height: 5,
+          ),
         ],
       ),
     );

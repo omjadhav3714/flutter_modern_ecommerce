@@ -29,7 +29,7 @@ class ProfileData extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    label,
+                    label.toUpperCase(),
                     style: const TextStyle(
                       fontSize: 16,
                     ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
@@ -22,8 +23,42 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _passCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passCtrl = TextEditingController();
+  bool isLoading = false;
+
+  void signIn() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _emailCtrl.text, password: _passCtrl.text);
+
+        _formKey.currentState!.reset();
+        Navigator.pushReplacementNamed(context, homeR);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          setState(() {
+            isLoading = false;
+          });
+          MessageHandler.showSnackBar(_scaffoldKey, userNotFound);
+        } else if (e.code == 'wrong-password') {
+          setState(() {
+            isLoading = false;
+          });
+          MessageHandler.showSnackBar(_scaffoldKey, wrongPass);
+        }
+      }
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+      MessageHandler.showSnackBar(_scaffoldKey, validAllFields);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -85,21 +120,26 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              AuthButton(
-                                label: signin,
-                                color: black,
-                                onPress: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, homeR);
-                                  if (_formKey.currentState!.validate()) {
-                                    print('Validated');
-                                  } else {
-                                    MessageHandler.showSnackBar(
-                                        _scaffoldKey, validAllFields);
-                                  }
-                                },
+                              isLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
+                                    )
+                                  : AuthButton(
+                                      label: signin,
+                                      color: black,
+                                      onPress: () {
+                                        signIn();
+                                      },
+                                    ),
+                              const SizedBox(
+                                height: 20,
                               ),
                               const SocialLoginButtons(),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               SizedBox(
                                 height: 60,
                                 child: CustomIconButton(

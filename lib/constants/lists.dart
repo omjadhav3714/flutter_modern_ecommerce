@@ -116,11 +116,11 @@ List<CategoryWidget> catWidgetList = const [
 ];
 
 // Bottombar widgets
-List<Widget> tabs = const [
-  HomeScreen(),
-  CategoryScreen(),
-  StoreScreen(),
-  CartScreen(),
+List<Widget> tabs = [
+  const HomeScreen(),
+  const CategoryScreen(),
+  const StoreScreen(),
+  const CartScreen(),
   ProfileScreen(),
 ];
 

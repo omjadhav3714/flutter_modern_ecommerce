@@ -64,9 +64,9 @@ const String email = 'Email';
 const String password = 'Password';
 const String name = 'Name';
 const String signin = 'Sign In';
-const String signinfacebook = 'Sign in with Facebook';
-const String signingoogle = 'Sign in with Google';
-const String signinguest = 'Sign in with Guest';
+const String signinfacebook = 'Facebook';
+const String signingoogle = 'Google';
+const String signinguest = 'Guest';
 const String signinseller = 'Sign in as Seller';
 const String signinuser = 'Sign in as User';
 const String signupuser = 'Sign up as User';
@@ -77,6 +77,13 @@ const String create = 'Create\nAccount';
 const String welcome = 'Welcome\nBack';
 const String welcomeseller = 'Welcome\nSeller';
 const String createseller = 'Create\nSeller Account';
+const String logout = 'Logout';
+const String changePass = 'Change Password';
+const String sureLogout = 'Are you sure to logout ?';
+const String editAc = "EDIT ACCOUNT";
+const String yes = 'Yes';
+const String no = 'No';
+const String ok = 'Ok';
 
 // Authentication Assests
 const String facebookAsset = 'images/inapp/facebook.jpg';
@@ -102,3 +109,24 @@ const String validEmail = "Enter valid email";
 const String validValue = 'Please enter value';
 const String validAllFields = 'Please Enter all Fields';
 const String validImage = 'Please Select Image';
+const String alreadyEmail = 'Email already exists';
+const String userNotFound = 'User not found';
+const String wrongPass = 'Wrong Password';
+
+// Null Check Profile Strings
+const String noAdd = 'No Address';
+const String noPhone = 'No Phone';
+
+// Collections
+const String userCollection = 'Users';
+const String sellerCollection = 'Sellers';
+
+const String profileImgC = "profile_image";
+const String phone = "phone";
+const String address = "address";
+const String emails = "email";
+const String names = "name";
+const String id = "id";
+const String sellerName = "seller-name";
+const String sellerLogo = "seller-logo";
+const String coverImg = "cover-image";

@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
 import 'package:modern_ecommerce/widgets/buttons/image_button_widget.dart';
 
@@ -11,55 +13,55 @@ class SocialLoginButtons extends StatefulWidget {
 }
 
 class _SocialLoginButtonsState extends State<SocialLoginButtons> {
+  CollectionReference users =
+      FirebaseFirestore.instance.collection(userCollection);
   @override
   Widget build(BuildContext context) {
     bool isLoading = false;
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(
-          height: 40,
+        CustomImageButton(
+          label: signinfacebook,
+          data: facebookAsset,
+          onPress: () {},
         ),
-        Container(
-          height: 60,
-          child: CustomImageButton(
-            label: signinfacebook,
-            data: facebookAsset,
-            onPress: () {},
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Container(
-          height: 60,
-          child: CustomImageButton(
-            label: signingoogle,
-            data: googleAsset,
-            onPress: () {},
-          ),
-        ),
-        const SizedBox(
-          height: 20,
+        CustomImageButton(
+          label: signingoogle,
+          data: googleAsset,
+          onPress: () {},
         ),
         isLoading == true
-            ? const CircularProgressIndicator()
-            : Container(
-                height: 60,
-                child: CustomImageButton(
-                  label: signinguest,
-                  data: guestAsset,
-                  onPress: () async {
-                    setState(() {
-                      isLoading = true;
-                    });
-                    await FirebaseAuth.instance.signInAnonymously();
-                    print('anonymus sucess');
-                  },
-                ),
+            ? const CircularProgressIndicator(
+                color: primaryColor,
+              )
+            : CustomImageButton(
+                label: signinguest,
+                data: guestAsset,
+                onPress: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  await FirebaseAuth.instance.signInAnonymously().whenComplete(
+                    () async {
+                      var _id = FirebaseAuth.instance.currentUser!.uid;
+                      await users.doc(_id).set(
+                        {
+                          id: _id,
+                          names: null,
+                          emails: null,
+                          profileImgC: null,
+                          phone: null,
+                          address: null,
+                        },
+                      );
+                    },
+                  );
+                  // adding data in firebase firestore
+
+                  Navigator.pushReplacementNamed(context, homeR);
+                },
               ),
-        const SizedBox(
-          height: 20,
-        ),
       ],
     );
   }
