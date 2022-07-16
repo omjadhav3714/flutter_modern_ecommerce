@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,11 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   bool isLoading = false;
   CollectionReference products =
       FirebaseFirestore.instance.collection(productsCollection);
+  var _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  Random _rnd = Random();
+
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
   void _pickMultiImage() async {
     try {
@@ -73,6 +79,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
         if (_imageFiles!.isNotEmpty) {
+          String pid = getRandomString(16);
           setState(() {
             isLoading = true;
           });
@@ -88,7 +95,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
               });
             }
 
-            products.doc().set({
+            products.doc(pid).set({
+              'pid': pid,
               'images': upoloadImageUrls,
               'sub-category': subCategoryValue,
               'category': mainCategory,
@@ -346,7 +354,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                       },
                 icon: isLoading
                     ? const CircularProgressIndicator(
-                        color: primaryColor,
+                        color: white,
                       )
                     : const Icon(
                         Icons.upload,
