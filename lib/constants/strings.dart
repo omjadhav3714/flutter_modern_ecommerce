@@ -145,3 +145,7 @@ const String productAdded = 'Product Added';
 const String productFailed = 'Product Adding Failed';
 const String imgFailed = 'Please Select Images';
 const String uploadImgFailed = 'Image Uploading Failed';
+const String selectMCategory = 'Select Main Category';
+const String selectSCategory = 'Select Sub Category';
+const String subCategoryS = 'Sub Category';
+const String selectCategories = 'Please Select Categories';

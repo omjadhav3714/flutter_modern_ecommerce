@@ -29,10 +29,11 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   String mainCategory = 'men';
-  String subCategoryValue = 'Sub Category';
+  String subCategoryValue = subCategoryS;
   List<String> subCategory = [];
   List<String> upoloadImageUrls = [];
   List<XFile>? _imageFiles = [];
+  bool isLoading = false;
   CollectionReference products =
       FirebaseFirestore.instance.collection(productsCollection);
 
@@ -68,10 +69,13 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   }
 
   void uploadProduct() async {
-    if (subCategoryValue != 'Sub Category') {
+    if (subCategoryValue != subCategoryS) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
         if (_imageFiles!.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
           try {
             for (var image in _imageFiles!) {
               firebase_storage.Reference ref = firebase_storage
@@ -88,18 +92,28 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
               'images': upoloadImageUrls,
               'sub-category': subCategoryValue,
               'category': mainCategory,
-              'price': priceCtrl.text,
-              'quantity': quantityCtrl.text,
+              'price': int.parse(priceCtrl.text),
+              'quantity': int.parse(quantityCtrl.text),
               'name': productNameCtrl.text,
               'desc': productDescCtrl.text,
               'seller-id': FirebaseAuth.instance.currentUser!.uid,
-              'discount': productDisCtrl.text,
+              'discount': int.parse(productDisCtrl.text),
+            }).then((value) {
+              setState(() {
+                isLoading = false;
+                _imageFiles = [];
+                priceCtrl.clear();
+                quantityCtrl.clear();
+                productNameCtrl.clear();
+                productDescCtrl.clear();
+                productDisCtrl.clear();
+                mainCategory = 'men';
+                subCategoryValue = subCategoryS;
+              });
             });
           } catch (e) {
             MessageHandler.showSnackBar(_scaffoldKey, uploadImgFailed);
           }
-
-          // upload profile pic to firebase storage
         } else {
           MessageHandler.showSnackBar(_scaffoldKey, imgFailed);
         }
@@ -107,7 +121,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
         MessageHandler.showSnackBar(_scaffoldKey, validAllFields);
       }
     } else {
-      MessageHandler.showSnackBar(_scaffoldKey, 'Select Categories');
+      MessageHandler.showSnackBar(_scaffoldKey, selectCategories);
     }
   }
 
@@ -149,7 +163,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
     }
     setState(() {
       mainCategory = value!;
-      subCategoryValue = 'Sub Category';
+      subCategoryValue = subCategoryS;
     });
   }
 
@@ -195,7 +209,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
-                                    const Text('Select Main Category'),
+                                    const Text(selectMCategory),
                                     DropdownButton(
                                       value: mainCategory,
                                       items: mainCat
@@ -215,10 +229,10 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
-                                    const Text('Select Sub Category'),
+                                    const Text(selectSCategory),
                                     DropdownButton(
                                       disabledHint: const Text(
-                                        'Select Main Category',
+                                        selectMCategory,
                                         style: TextStyle(
                                           fontSize: 10,
                                         ),
@@ -325,12 +339,18 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
               onPressed: () {},
               backgroundColor: primaryColor,
               child: IconButton(
-                onPressed: () {
-                  uploadProduct();
-                },
-                icon: const Icon(
-                  Icons.upload,
-                ),
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        uploadProduct();
+                      },
+                icon: isLoading
+                    ? const CircularProgressIndicator(
+                        color: primaryColor,
+                      )
+                    : const Icon(
+                        Icons.upload,
+                      ),
               ),
             ),
           ],
