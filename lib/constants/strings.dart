@@ -4,7 +4,7 @@ const String app = 'Modern Ecommerce';
 // Routes
 const String initial = '/';
 const String homeR = '/home';
-const String sellerHome = '/seller_home';
+const String sellerHome = '/sellerHome';
 
 // Home Strings
 const String home = 'Home';
@@ -84,6 +84,7 @@ const String editAc = "EDIT ACCOUNT";
 const String yes = 'Yes';
 const String no = 'No';
 const String ok = 'Ok';
+const String clear = 'Clear Images';
 
 // Authentication Assests
 const String facebookAsset = 'images/inapp/facebook.jpg';
@@ -120,7 +121,9 @@ const String noPhone = 'No Phone';
 // Collections
 const String userCollection = 'Users';
 const String sellerCollection = 'Sellers';
+const String productsCollection = 'Products';
 
+// Document fields
 const String profileImgC = "profile_image";
 const String phone = "phone";
 const String address = "address";
@@ -130,3 +133,15 @@ const String id = "id";
 const String sellerName = "seller-name";
 const String sellerLogo = "seller-logo";
 const String coverImg = "cover-image";
+
+// Upload Product Strings
+const String noPick = '\t\t\t\t\tYou have not \n\n Picked Images yet';
+const String priceP = 'Enter Product Price';
+const String quantityP = 'Enter Product Quantity';
+const String productNameP = 'Enter Product Name';
+const String productDescP = 'Enter Product Description';
+const String productDiscP = 'Enter Product Discount';
+const String productAdded = 'Product Added';
+const String productFailed = 'Product Adding Failed';
+const String imgFailed = 'Please Select Images';
+const String uploadImgFailed = 'Image Uploading Failed';

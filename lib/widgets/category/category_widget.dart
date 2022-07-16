@@ -45,12 +45,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       crossAxisSpacing: 10,
                       crossAxisCount: 3,
                       children: List.generate(
-                        widget.subCat.length,
+                        widget.subCat.length - 1,
                         (index) => SubCategoryWidget(
                           catName: widget.catName,
-                          subCatName: widget.subCat[index],
+                          subCatName: widget.subCat[index + 1],
                           assetName: widget.assestName + '$index.jpg',
-                          subCatLabel: widget.subCat[index],
+                          subCatLabel: widget.subCat[index + 1],
                         ),
                       ),
                     ),

@@ -7,9 +7,11 @@ class CustomTextField extends StatelessWidget {
   final String hintTxt;
   final Color? colorT;
   final String? Function(String?)? validate;
+  final TextInputType? txtType;
   const CustomTextField({
     this.obs,
     this.colorT,
+    this.txtType,
     required this.ctrl,
     required this.hintTxt,
     required this.validate,
@@ -22,6 +24,7 @@ class CustomTextField extends StatelessWidget {
       style: TextStyle(color: colorT ?? white),
       obscureText: obs ?? false,
       controller: ctrl,
+      keyboardType: txtType ?? TextInputType.text,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

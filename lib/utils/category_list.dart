@@ -12,6 +12,7 @@ const List<String> mainCat = [
 ];
 
 const List<String> menL = [
+  'Sub Category',
   'T-Shirts',
   'Shirts',
   'Track Pants',
@@ -21,6 +22,7 @@ const List<String> menL = [
 ];
 
 const List<String> womenL = [
+  'Sub Category',
   'Sarees',
   'Tops',
   'Kurtis',
@@ -30,6 +32,7 @@ const List<String> womenL = [
 ];
 
 const List<String> kidsL = [
+  'Sub Category',
   'T-shirt',
   'Pyjamas',
   'BodySuits',
@@ -39,6 +42,7 @@ const List<String> kidsL = [
 ];
 
 const List<String> shoesL = [
+  'Sub Category',
   'Slippers',
   'Sandals',
   'Sports',
@@ -54,6 +58,7 @@ const List<String> shoesL = [
 ];
 
 const List<String> bagsL = [
+  'Sub Category',
   'Walltet',
   'Bag',
   'Handbag',
@@ -64,6 +69,7 @@ const List<String> bagsL = [
 ];
 
 const List<String> mobileL = [
+  'Sub Category',
   'Smartphones',
   'Accessories',
   'Featured',
@@ -73,6 +79,7 @@ const List<String> mobileL = [
 ];
 
 const List<String> gamingL = [
+  'Sub Category',
   'Acessories',
   'Graphics Card',
   'Speakers',
@@ -85,6 +92,7 @@ const List<String> gamingL = [
 ];
 
 const List<String> electronicsL = [
+  'Sub Category',
   'Earbuds',
   'Smart Watch',
   'Keyboard',
@@ -97,6 +105,7 @@ const List<String> electronicsL = [
 ];
 
 const List<String> pcL = [
+  'Sub Category',
   'Laptop',
   'Remote',
   'Printer',
@@ -109,6 +118,7 @@ const List<String> pcL = [
 ];
 
 const List<String> accessoriesL = [
+  'Sub Category',
   'Caps',
   'Glasses-Men',
   'Glasses-women',
