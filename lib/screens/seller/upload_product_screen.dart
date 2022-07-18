@@ -37,11 +37,18 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   bool isLoading = false;
   CollectionReference products =
       FirebaseFirestore.instance.collection(productsCollection);
-  var _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  Random _rnd = Random();
+  final _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  final Random _rnd = Random();
 
-  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  String getRandomString(int length) => String.fromCharCodes(
+        Iterable.generate(
+          length,
+          (_) => _chars.codeUnitAt(
+            _rnd.nextInt(_chars.length),
+          ),
+        ),
+      );
 
   void _pickMultiImage() async {
     try {
@@ -79,7 +86,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
         if (_imageFiles!.isNotEmpty) {
-          String pid = getRandomString(16);
+          String pid = getRandomString(28);
           setState(() {
             isLoading = true;
           });

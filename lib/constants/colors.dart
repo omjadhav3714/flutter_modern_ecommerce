@@ -7,3 +7,4 @@ const Color grey = Color(0xFF6b7280);
 const Color greyLight = Color(0xFFd1d5db);
 const Color primaryColor = Color(0xFFdb2777);
 const Color transparent = Colors.transparent;
+ const Color notWhite = Color(0xFFEDF0F2);

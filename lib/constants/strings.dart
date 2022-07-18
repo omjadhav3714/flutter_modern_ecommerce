@@ -149,3 +149,11 @@ const String selectMCategory = 'Select Main Category';
 const String selectSCategory = 'Select Sub Category';
 const String subCategoryS = 'Sub Category';
 const String selectCategories = 'Please Select Categories';
+
+// Products Strignd
+const String wentWrong = 'Something went wrong';
+const String quantityA = ' quantity available';
+const String productD = 'Product Description';
+const String relatedI = 'Related Items';
+const String noData = 'Oops No data';
+const String addToCart = 'Add to Cart';

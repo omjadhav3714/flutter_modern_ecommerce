@@ -16,6 +16,7 @@ import 'package:modern_ecommerce/screens/users/cart_screen.dart';
 import 'package:modern_ecommerce/screens/users/profile_screen.dart';
 import 'package:modern_ecommerce/utils/category_list.dart';
 import 'package:modern_ecommerce/widgets/category/category_widget.dart';
+import 'package:modern_ecommerce/widgets/custom_tab_widget.dart';
 
 // Dashboard List
 List<String> dash = [
@@ -198,4 +199,37 @@ List<BottomNavigationBarItem> sellerBottom = const [
     ),
     label: addProduct,
   ),
+];
+
+List<CustomTabWidget> customTabs = const [
+  CustomTabWidget(
+                label: men,
+              ),
+              CustomTabWidget(
+                label: women,
+              ),
+              CustomTabWidget(
+                label: kids,
+              ),
+              CustomTabWidget(
+                label: shoes,
+              ),
+              CustomTabWidget(
+                label: bags,
+              ),
+              CustomTabWidget(
+                label: mobile,
+              ),
+              CustomTabWidget(
+                label: gaming,
+              ),
+              CustomTabWidget(
+                label: electronics,
+              ),
+              CustomTabWidget(
+                label: pc,
+              ),
+              CustomTabWidget(
+                label: accessories,
+              ),
 ];
