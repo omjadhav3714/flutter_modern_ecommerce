@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
+import 'package:modern_ecommerce/screens/carousel_full_screen.dart';
 import 'package:modern_ecommerce/static/backbutton_widget.dart';
 import 'package:modern_ecommerce/widgets/buttons/custom_icon_button_widget.dart';
 import 'package:modern_ecommerce/widgets/hyphen_text_header_widget.dart';
@@ -56,24 +57,36 @@ class _ProductDetailState extends State<ProductDetail> {
                       children: [
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.45,
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              height: 400.0,
-                              aspectRatio: 2.0,
-                              enlargeCenterPage: true,
-                              enableInfiniteScroll: false,
-                              initialPage: 2,
-                              autoPlay: true,
-                            ),
-                            items: List.generate(
-                              snapshot.data!['images'].length,
-                              (index) => Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: const BoxDecoration(color: white),
-                                child: Image.network(
-                                  snapshot.data!['images'][index],
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FullScreenView(
+                                    imagesList: snapshot.data!['images'],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                height: 400.0,
+                                aspectRatio: 2.0,
+                                enlargeCenterPage: true,
+                                enableInfiniteScroll: false,
+                                initialPage: 2,
+                                autoPlay: true,
+                              ),
+                              items: List.generate(
+                                snapshot.data!['images'].length,
+                                (index) => Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
+                                  decoration: const BoxDecoration(color: white),
+                                  child: Image.network(
+                                    snapshot.data!['images'][index],
+                                  ),
                                 ),
                               ),
                             ),
