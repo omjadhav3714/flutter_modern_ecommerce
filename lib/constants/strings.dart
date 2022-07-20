@@ -158,3 +158,6 @@ const String productD = 'Product Description';
 const String relatedI = 'Related Items';
 const String noData = 'Oops No data';
 const String addToCart = 'Add to Cart';
+
+const String follow = 'Follow';
+const String unfollow = 'Unollow';

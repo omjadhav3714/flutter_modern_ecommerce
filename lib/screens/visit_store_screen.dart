@@ -17,6 +17,7 @@ class VisitStoreScreen extends StatefulWidget {
 
 class _VisitStoreScreenState extends State<VisitStoreScreen>
     with TickerProviderStateMixin {
+  bool isFollowing = false;
   AnimationController? animationController;
   @override
   void initState() {
@@ -59,11 +60,17 @@ class _VisitStoreScreenState extends State<VisitStoreScreen>
               ),
               leading: const BackButtonWidget(),
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.person_add_rounded,
-                    color: primaryColor,
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isFollowing = !isFollowing;
+                    });
+                  },
+                  child: Text(
+                    isFollowing == true ? follow : unfollow,
+                    style: const TextStyle(
+                      color: primaryColor,
+                    ),
                   ),
                 ),
               ],
