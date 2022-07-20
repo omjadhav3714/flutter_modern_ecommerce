@@ -92,6 +92,7 @@ const String googleAsset = 'images/inapp/google.jpg';
 const String guestAsset = 'images/inapp/guest.jpg';
 const String loginAsset = 'images/inapp/login.png';
 const String registerAsset = 'images/inapp/register.png';
+const String storeAsset = 'images/inapp/store.png';
 
 // Dashboard Strings
 const String myStore = 'My Store';

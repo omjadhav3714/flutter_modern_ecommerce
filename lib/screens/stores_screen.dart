@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
@@ -22,8 +23,55 @@ class _StoreScreenState extends State<StoreScreen> {
           title: store,
         ),
       ),
-      body: const Center(
-        child: Text("Store"),
+      body: StreamBuilder<QuerySnapshot>(
+        stream:
+            FirebaseFirestore.instance.collection(sellerCollection).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            return GridView.builder(
+              itemCount: snapshot.data!.docs.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 25,
+                mainAxisSpacing: 25,
+              ),
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    Stack(
+                      children: [
+                        SizedBox(
+                          height: 120,
+                          width: 120,
+                          child: Image.asset(storeAsset),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          left: 10,
+                          child: SizedBox(
+                            height: 60,
+                            width: 100,
+                            child: Image.network(
+                              snapshot.data!.docs[index]['seller-logo'],
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      snapshot.data!.docs[index]['seller-name'],
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+          return const Center(
+            child: Text(noData),
+          );
+        },
       ),
     );
   }
