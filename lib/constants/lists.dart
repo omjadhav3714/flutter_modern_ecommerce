@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
 import 'package:modern_ecommerce/models/item_data_model.dart';
@@ -14,6 +15,7 @@ import 'package:modern_ecommerce/screens/seller/upload_product_screen.dart';
 import 'package:modern_ecommerce/screens/stores_screen.dart';
 import 'package:modern_ecommerce/screens/users/cart_screen.dart';
 import 'package:modern_ecommerce/screens/users/profile_screen.dart';
+import 'package:modern_ecommerce/screens/visit_store_screen.dart';
 import 'package:modern_ecommerce/utils/category_list.dart';
 import 'package:modern_ecommerce/widgets/category/category_widget.dart';
 import 'package:modern_ecommerce/widgets/custom_tab_widget.dart';
@@ -39,8 +41,8 @@ List<IconData> ico = [
 ];
 
 // Dashboard Screens
-List<Widget> dashScreen = const [
-  MyStoreScreen(),
+List<Widget> dashScreen = [
+  MyStoreScreen(documentId: FirebaseAuth.instance.currentUser!.uid),
   OrdersScreen(),
   EditProfileScreen(),
   ManageProductsScreen(),
@@ -203,33 +205,33 @@ List<BottomNavigationBarItem> sellerBottom = const [
 
 List<CustomTabWidget> customTabs = const [
   CustomTabWidget(
-                label: men,
-              ),
-              CustomTabWidget(
-                label: women,
-              ),
-              CustomTabWidget(
-                label: kids,
-              ),
-              CustomTabWidget(
-                label: shoes,
-              ),
-              CustomTabWidget(
-                label: bags,
-              ),
-              CustomTabWidget(
-                label: mobile,
-              ),
-              CustomTabWidget(
-                label: gaming,
-              ),
-              CustomTabWidget(
-                label: electronics,
-              ),
-              CustomTabWidget(
-                label: pc,
-              ),
-              CustomTabWidget(
-                label: accessories,
-              ),
+    label: men,
+  ),
+  CustomTabWidget(
+    label: women,
+  ),
+  CustomTabWidget(
+    label: kids,
+  ),
+  CustomTabWidget(
+    label: shoes,
+  ),
+  CustomTabWidget(
+    label: bags,
+  ),
+  CustomTabWidget(
+    label: mobile,
+  ),
+  CustomTabWidget(
+    label: gaming,
+  ),
+  CustomTabWidget(
+    label: electronics,
+  ),
+  CustomTabWidget(
+    label: pc,
+  ),
+  CustomTabWidget(
+    label: accessories,
+  ),
 ];

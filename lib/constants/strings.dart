@@ -160,4 +160,4 @@ const String noData = 'Oops No data';
 const String addToCart = 'Add to Cart';
 
 const String follow = 'Follow';
-const String unfollow = 'Unollow';
+const String unfollow = 'Unfollow';
