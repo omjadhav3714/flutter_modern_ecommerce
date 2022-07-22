@@ -4,7 +4,7 @@ import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
 import 'package:modern_ecommerce/static/backbutton_widget.dart';
 import 'package:modern_ecommerce/widgets/appbar_title_widget.dart';
-import 'package:modern_ecommerce/widgets/product_card_widget.dart';
+import 'package:modern_ecommerce/widgets/products/product_edit_card_widget.dart';
 
 class MyStoreScreen extends StatefulWidget {
   final String documentId;
@@ -97,7 +97,7 @@ class _MyStoreScreenState extends State<MyStoreScreen>
                         ),
                       );
                       animationController?.forward();
-                      return ProductCard(
+                      return ProductEditCard(
                         animation: animation,
                         animationController: animationController,
                         data: snapshot.data!.docs[index],

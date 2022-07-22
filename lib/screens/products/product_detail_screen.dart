@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
-import 'package:modern_ecommerce/screens/carousel_full_screen.dart';
+import 'package:modern_ecommerce/screens/products/carousel_full_screen.dart';
 import 'package:modern_ecommerce/static/backbutton_widget.dart';
 import 'package:modern_ecommerce/widgets/buttons/custom_icon_button_widget.dart';
 import 'package:modern_ecommerce/widgets/hyphen_text_header_widget.dart';

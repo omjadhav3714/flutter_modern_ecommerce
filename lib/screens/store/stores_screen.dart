@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
-import 'package:modern_ecommerce/screens/visit_store_screen.dart';
+import 'package:modern_ecommerce/screens/store/visit_store_screen.dart';
 import 'package:modern_ecommerce/widgets/appbar_title_widget.dart';
 
 class StoreScreen extends StatefulWidget {

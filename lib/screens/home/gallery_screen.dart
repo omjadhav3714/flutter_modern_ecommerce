@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
-import 'package:modern_ecommerce/screens/product_detail_screen.dart';
-import 'package:modern_ecommerce/widgets/product_card_widget.dart';
+import 'package:modern_ecommerce/screens/products/product_detail_screen.dart';
+import 'package:modern_ecommerce/widgets/products/product_card_widget.dart';
 
 class GalleryScreen extends StatefulWidget {
   final String cat;

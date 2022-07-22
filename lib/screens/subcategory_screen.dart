@@ -4,7 +4,7 @@ import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
 import 'package:modern_ecommerce/widgets/appbar_title_widget.dart';
 import 'package:modern_ecommerce/static/backbutton_widget.dart';
-import 'package:modern_ecommerce/widgets/product_card_widget.dart';
+import 'package:modern_ecommerce/widgets/products/product_card_widget.dart';
 
 class SubCategoryScreen extends StatefulWidget {
   final String mainCatName;

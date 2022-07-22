@@ -2,10 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
-import 'package:modern_ecommerce/screens/product_detail_screen.dart';
+import 'package:modern_ecommerce/screens/products/product_detail_screen.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard(
+class ProductEditCard extends StatelessWidget {
+  const ProductEditCard(
       {Key? key, this.animationController, this.animation, this.data})
       : super(key: key);
 
@@ -103,7 +103,7 @@ class ProductCard extends StatelessWidget {
                                                 IconButton(
                                                   onPressed: () {},
                                                   icon: const Icon(
-                                                    Icons.favorite_outline,
+                                                    Icons.edit,
                                                     color: primaryColor,
                                                     size: 20,
                                                   ),

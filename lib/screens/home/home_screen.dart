@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/lists.dart';
-import 'package:modern_ecommerce/screens/gallery_screen.dart';
+import 'package:modern_ecommerce/screens/home/gallery_screen.dart';
 import 'package:modern_ecommerce/static/custom_search_widget.dart';
 import 'package:modern_ecommerce/utils/category_list.dart';
 
