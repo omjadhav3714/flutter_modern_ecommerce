@@ -162,3 +162,8 @@ const String addToCart = 'Add to Cart';
 
 const String follow = 'Follow';
 const String unfollow = 'Unfollow';
+
+// Cart Strings
+const String rs = 'Rs. ';
+const String total = "Total :";
+const String checkout = "CHECKOUT";

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
@@ -41,8 +42,8 @@ class _CartScreenState extends State<CartScreen> {
                             child: Row(
                               children: [
                                 Container(
-                                  width: 140,
-                                  height: 180,
+                                  width: 130,
+                                  height: 130,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     image: DecorationImage(
@@ -56,99 +57,95 @@ class _CartScreenState extends State<CartScreen> {
                                 const SizedBox(
                                   width: 20,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      cart.getItems[index].name,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 20,
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        cart.getItems[index].name,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "ref ",
-                                      style: TextStyle(
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        rs +
+                                            cart.getItems[index].price
+                                                .toString(),
+                                        style: TextStyle(
                                           fontSize: 13,
-                                          color: black.withOpacity(0.7)),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      '20',
-                                      style: TextStyle(
-                                        fontSize: 22,
+                                          color: black.withOpacity(0.7),
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 40,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          '50',
-                                          style: TextStyle(
-                                            fontSize: 22,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 25,
-                                              height: 25,
-                                              decoration: BoxDecoration(
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 25,
+                                                height: 25,
+                                                decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   border: Border.all(
-                                                      color: black
-                                                          .withOpacity(0.5))),
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.minimize,
-                                                  size: 10,
-                                                  color: black.withOpacity(0.5),
+                                                    color:
+                                                        black.withOpacity(0.5),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Icon(
+                                                    Icons.minimize,
+                                                    size: 10,
+                                                    color:
+                                                        black.withOpacity(0.5),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              "1",
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              width: 25,
-                                              height: 25,
-                                              decoration: BoxDecoration(
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                cart.getItems[index].quantity
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Container(
+                                                width: 25,
+                                                height: 25,
+                                                decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   border: Border.all(
-                                                      color: black
-                                                          .withOpacity(0.5))),
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.add,
-                                                  size: 10,
-                                                  color: black.withOpacity(0.5),
+                                                    color:
+                                                        black.withOpacity(0.5),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    size: 10,
+                                                    color:
+                                                        black.withOpacity(0.5),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
@@ -163,14 +160,22 @@ class _CartScreenState extends State<CartScreen> {
                   const SizedBox(
                     height: 15,
                   ),
+                  const Divider(
+                    thickness: 2,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    padding: const EdgeInsets.only(
+                      left: 30,
+                      right: 30,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total : Rs.500",
-                          style: TextStyle(fontSize: 16),
+                          total + cart.getItems[index].price.toString(),
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ],
                     ),
@@ -178,30 +183,34 @@ class _CartScreenState extends State<CartScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.circular(50 / 2)),
-                      child: Center(
-                        child: Text(
-                          "Checkout".toUpperCase(),
-                          style: const TextStyle(
-                            color: white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               );
             },
           );
         },
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+        ),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(50 / 2),
+          ),
+          child: const Center(
+            child: Text(
+              checkout,
+              style: TextStyle(
+                color: white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -8,7 +8,7 @@ class Cart extends ChangeNotifier {
   }
 
   int? get count {
-    _list.length;
+    return _list.length;
   }
 
   void addItem(
