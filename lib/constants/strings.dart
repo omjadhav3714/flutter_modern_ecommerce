@@ -123,6 +123,7 @@ const String noPhone = 'No Phone';
 const String userCollection = 'Users';
 const String sellerCollection = 'Sellers';
 const String productsCollection = 'Products';
+const String anonymousCollection = 'Anonymous';
 
 // Document fields
 const String profileImgC = "profile_image";

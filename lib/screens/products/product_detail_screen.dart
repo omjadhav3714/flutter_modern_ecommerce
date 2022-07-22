@@ -4,16 +4,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/colors.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
+import 'package:modern_ecommerce/providers/cart_provider.dart';
 import 'package:modern_ecommerce/screens/products/carousel_full_screen.dart';
 import 'package:modern_ecommerce/static/backbutton_widget.dart';
 import 'package:modern_ecommerce/widgets/buttons/custom_icon_button_widget.dart';
 import 'package:modern_ecommerce/widgets/hyphen_text_header_widget.dart';
+import 'package:provider/src/provider.dart';
 
 class ProductDetail extends StatefulWidget {
   final String category;
   final String id;
-  const ProductDetail({Key? key, required this.category, required this.id})
-      : super(key: key);
+  final QueryDocumentSnapshot? data;
+  const ProductDetail({
+    Key? key,
+    required this.category,
+    required this.id,
+    required this.data,
+  }) : super(key: key);
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -260,7 +267,27 @@ class _ProductDetailState extends State<ProductDetail> {
               CustomIconButton(
                 label: addToCart,
                 data: Icons.shopping_cart,
-                onPress: () {},
+                onPress: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const CartScreen(
+                  //       back: BackButtonWidget(),
+                  //     ),
+                  //   ),
+                  // );
+
+                  context.read<Cart>().addItem(
+                        widget.data!['name'],
+                        widget.data!['price'],
+                        1,
+                        widget.data!['quantity'],
+                        widget.data!['images'],
+                        widget.data!['pid'],
+                        widget.data!['seller-id'],
+                      );
+                  print(widget.data!.data());
+                },
               ),
               const SizedBox(
                 width: 5,

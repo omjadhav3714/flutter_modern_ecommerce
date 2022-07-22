@@ -2,13 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_ecommerce/constants/strings.dart';
 import 'package:modern_ecommerce/main_page.dart';
+import 'package:modern_ecommerce/providers/cart_provider.dart';
 import 'package:modern_ecommerce/screens/auth/login_screen.dart';
 import 'package:modern_ecommerce/seller_main_page.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => Cart())
+    ],
+    child: const MyApp(),),);
 }
 
 class MyApp extends StatelessWidget {

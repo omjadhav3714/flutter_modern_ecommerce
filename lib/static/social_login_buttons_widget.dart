@@ -15,6 +15,9 @@ class SocialLoginButtons extends StatefulWidget {
 class _SocialLoginButtonsState extends State<SocialLoginButtons> {
   CollectionReference users =
       FirebaseFirestore.instance.collection(userCollection);
+      CollectionReference anonymous =
+      FirebaseFirestore.instance.collection(anonymousCollection);
+      
   @override
   Widget build(BuildContext context) {
     bool isLoading = false;
@@ -45,7 +48,7 @@ class _SocialLoginButtonsState extends State<SocialLoginButtons> {
                   await FirebaseAuth.instance.signInAnonymously().whenComplete(
                     () async {
                       var _id = FirebaseAuth.instance.currentUser!.uid;
-                      await users.doc(_id).set(
+                      await anonymous.doc(_id).set(
                         {
                           id: _id,
                           names: null,

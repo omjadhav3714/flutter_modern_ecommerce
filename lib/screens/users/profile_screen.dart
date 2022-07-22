@@ -15,7 +15,7 @@ import 'package:modern_ecommerce/widgets/custom_dialogs.dart';
 import 'package:modern_ecommerce/widgets/profile_data_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen();
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -27,9 +27,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var userId = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference users =
         FirebaseFirestore.instance.collection(userCollection);
+    CollectionReference anonymous =
+        FirebaseFirestore.instance.collection(anonymousCollection);
 
     return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(userId).get(),
+      future: FirebaseAuth.instance.currentUser!.isAnonymous
+          ? anonymous.doc(userId).get()
+          : users.doc(userId).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -135,14 +139,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: primaryColor,
-                                borderRadius: BorderRadius.circular(5)),
+                              color: primaryColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             child: const Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Center(
                                 child: Text(
                                   editAc,
-                                  style: TextStyle(fontSize: 13, color: white),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: white,
+                                  ),
                                 ),
                               ),
                             ),

@@ -32,6 +32,7 @@ class ProductCard extends StatelessWidget {
                     builder: (context) => ProductDetail(
                       id: data!["pid"],
                       category: data!["category"],
+                      data: data,
                     ),
                   ),
                 );
