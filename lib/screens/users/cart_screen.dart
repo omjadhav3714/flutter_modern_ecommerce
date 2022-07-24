@@ -209,25 +209,8 @@ class _CartScreenState extends State<CartScreen> {
                   const Divider(
                     thickness: 2,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          total + cart.getItems[index].price.toString(),
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                 ],
               );

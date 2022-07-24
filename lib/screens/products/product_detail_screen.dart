@@ -276,15 +276,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   label: addToCart,
                   data: Icons.shopping_cart,
                   onPress: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const CartScreen(
-                    //       back: BackButtonWidget(),
-                    //     ),
-                    //   ),
-                    // );
-
+            
                     context.read<Cart>().getItems.firstWhereOrNull((product) =>
                                 product.productId == widget.data!['pid']) !=
                             null
