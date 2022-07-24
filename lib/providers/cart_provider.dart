@@ -32,4 +32,14 @@ class Cart extends ChangeNotifier {
     _list.add(product);
     notifyListeners();
   }
+
+  void increment(Product product) {
+    product.increase();
+    notifyListeners();
+  }
+
+  void decrement(Product product) {
+    product.decrease();
+    notifyListeners();
+  }
 }

@@ -100,23 +100,56 @@ class _CartScreenState extends State<CartScreen> {
                                                   ),
                                                 ),
                                                 child: Center(
-                                                  child: Icon(
-                                                    Icons.minimize,
-                                                    size: 10,
-                                                    color:
-                                                        black.withOpacity(0.5),
-                                                  ),
+                                                  child: cart.getItems[index]
+                                                              .qty ==
+                                                          1
+                                                      ? IconButton(
+                                                          onPressed: () {
+                                                            // cart.increment(
+                                                            //     cart.getItems[index]);
+                                                          },
+                                                          icon: Icon(
+                                                            Icons
+                                                                .delete_forever,
+                                                            size: 10,
+                                                            color: black
+                                                                .withOpacity(
+                                                                    0.5),
+                                                          ),
+                                                        )
+                                                      : IconButton(
+                                                          onPressed: () {
+                                                            cart.decrement(
+                                                                cart.getItems[
+                                                                    index]);
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.minimize,
+                                                            size: 10,
+                                                            color: black
+                                                                .withOpacity(
+                                                                    0.5),
+                                                          ),
+                                                        ),
                                                 ),
                                               ),
                                               const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
-                                                cart.getItems[index].quantity
+                                                cart.getItems[index].qty
                                                     .toString(),
-                                                style: const TextStyle(
-                                                  fontSize: 15,
-                                                ),
+                                                style:
+                                                    cart.getItems[index].qty ==
+                                                            cart.getItems[index]
+                                                                .quantity
+                                                        ? const TextStyle(
+                                                            fontSize: 15,
+                                                            color: primaryColor,
+                                                          )
+                                                        : const TextStyle(
+                                                            fontSize: 15,
+                                                          ),
                                               ),
                                               const SizedBox(
                                                 width: 10,
@@ -132,11 +165,24 @@ class _CartScreenState extends State<CartScreen> {
                                                   ),
                                                 ),
                                                 child: Center(
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    size: 10,
-                                                    color:
-                                                        black.withOpacity(0.5),
+                                                  child: IconButton(
+                                                    onPressed: cart
+                                                                .getItems[index]
+                                                                .qty ==
+                                                            cart.getItems[index]
+                                                                .quantity
+                                                        ? null
+                                                        : () {
+                                                            cart.increment(
+                                                                cart.getItems[
+                                                                    index]);
+                                                          },
+                                                    icon: Icon(
+                                                      Icons.add,
+                                                      size: 10,
+                                                      color: black
+                                                          .withOpacity(0.5),
+                                                    ),
                                                   ),
                                                 ),
                                               ),

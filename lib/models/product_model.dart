@@ -16,4 +16,12 @@ class Product {
     required this.productId,
     required this.sellerId,
   });
+
+  void increase() {
+    qty++;
+  }
+
+  void decrease() {
+    qty--;
+  }
 }
