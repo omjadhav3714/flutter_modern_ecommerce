@@ -90,8 +90,8 @@ class _CartScreenState extends State<CartScreen> {
                                           Row(
                                             children: [
                                               Container(
-                                                width: 25,
-                                                height: 25,
+                                                width: 30,
+                                                height: 30,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   border: Border.all(
@@ -111,7 +111,7 @@ class _CartScreenState extends State<CartScreen> {
                                                           icon: Icon(
                                                             Icons
                                                                 .delete_forever,
-                                                            size: 10,
+                                                            size: 15,
                                                             color: black
                                                                 .withOpacity(
                                                                     0.5),
@@ -125,7 +125,7 @@ class _CartScreenState extends State<CartScreen> {
                                                           },
                                                           icon: Icon(
                                                             Icons.minimize,
-                                                            size: 10,
+                                                            size: 15,
                                                             color: black
                                                                 .withOpacity(
                                                                     0.5),
@@ -155,8 +155,8 @@ class _CartScreenState extends State<CartScreen> {
                                                 width: 10,
                                               ),
                                               Container(
-                                                width: 25,
-                                                height: 25,
+                                                width: 30,
+                                                height: 30,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   border: Border.all(
@@ -179,7 +179,7 @@ class _CartScreenState extends State<CartScreen> {
                                                           },
                                                     icon: Icon(
                                                       Icons.add,
-                                                      size: 10,
+                                                      size: 15,
                                                       color: black
                                                           .withOpacity(0.5),
                                                     ),
