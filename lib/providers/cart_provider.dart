@@ -11,6 +11,14 @@ class Cart extends ChangeNotifier {
     return _list.length;
   }
 
+  double get totalPrice {
+    var total = 0.0;
+    for (var item in _list) {
+      total += item.price * item.qty;
+    }
+    return total;
+  }
+
   void addItem(
     String name,
     int price,

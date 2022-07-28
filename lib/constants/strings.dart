@@ -169,4 +169,4 @@ const String unfollow = 'Unfollow';
 // Cart Strings
 const String rs = 'Rs. ';
 const String total = "Total :";
-const String checkout = "CHECKOUT";
+const String checkout = "CHECKOUT & PAY ";

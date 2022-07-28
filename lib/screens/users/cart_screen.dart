@@ -262,32 +262,41 @@ class _CartScreenState extends State<CartScreen> {
                 );
               },
             )
-          : Center(
-              child: Text(noData),
-            ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.only(
-          left: 20,
-          right: 20,
-        ),
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: BorderRadius.circular(50 / 2),
-          ),
-          child: const Center(
-            child: Text(
-              checkout,
-              style: TextStyle(
-                color: white,
-                fontWeight: FontWeight.bold,
+          : const Center(
+              child: Text(
+                noData,
+                style: TextStyle(
+                  fontWeight: FontWeight.w200,
+                  fontSize: 24,
+                ),
               ),
             ),
-          ),
-        ),
-      ),
+      bottomSheet: context.watch<Cart>().getItems.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(50 / 2),
+                ),
+                child: Center(
+                  child: Text(
+                    checkout +
+                        context.watch<Cart>().totalPrice.toStringAsFixed(2),
+                    style: const TextStyle(
+                      color: white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          : const SizedBox(),
     );
   }
 }
