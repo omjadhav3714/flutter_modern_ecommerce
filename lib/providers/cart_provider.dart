@@ -42,4 +42,14 @@ class Cart extends ChangeNotifier {
     product.decrease();
     notifyListeners();
   }
+
+  void removeItem(Product product) {
+    _list.add(product);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _list.clear();
+    notifyListeners();
+  }
 }
