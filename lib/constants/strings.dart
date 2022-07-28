@@ -160,6 +160,8 @@ const String relatedI = 'Related Items';
 const String noData = 'Oops No data';
 const String addToCart = 'Add to Cart';
 const String alreadyAddedToCart = 'Already added to cart';
+const String clearCart = 'Clear Carrt';
+const String sureToClearCart = 'Are you sure to clear cart?';
 
 const String follow = 'Follow';
 const String unfollow = 'Unfollow';

@@ -35,11 +35,12 @@ class _CartScreenState extends State<CartScreen> {
                           borderRadius: BorderRadius.circular(4.0),
                         ),
                         child: CustomConfirmDialog(
-                          title: logout,
-                          subtitle: sureLogout,
-                          icon: Icons.logout,
+                          title: clearCart,
+                          subtitle: sureToClearCart,
+                          icon: Icons.delete_forever,
                           onYesPressed: () {
                             context.read<Cart>().clearCart();
+                            Navigator.pop(context);
                           },
                         ),
                       ),
@@ -47,6 +48,7 @@ class _CartScreenState extends State<CartScreen> {
                   },
                   icon: const Icon(
                     Icons.delete_forever,
+                    color: black,
                   ),
                 )
               : Container(),

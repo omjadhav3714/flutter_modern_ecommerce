@@ -44,7 +44,7 @@ class Cart extends ChangeNotifier {
   }
 
   void removeItem(Product product) {
-    _list.add(product);
+    _list.remove(product);
     notifyListeners();
   }
 
