@@ -56,8 +56,7 @@ class _CustomOkDialogState extends State<CustomOkDialog> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // ignore: deprecated_member_use
-                      RaisedButton(
-                        color: primaryColor,
+                      ElevatedButton(
                         child: const Text(
                           ok,
                           style: TextStyle(color: white),
@@ -142,8 +141,7 @@ class _CustomConfirmDialogState extends State<CustomConfirmDialog> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // ignore: deprecated_member_use
-                    RaisedButton(
-                      color: primaryColor,
+                    ElevatedButton(
                       child: const Text(
                         yes,
                         style: TextStyle(color: white),
@@ -154,8 +152,7 @@ class _CustomConfirmDialogState extends State<CustomConfirmDialog> {
                       width: 20.0,
                     ),
                     // ignore: deprecated_member_use
-                    RaisedButton(
-                      color: primaryColor,
+                    ElevatedButton(
                       child: const Text(
                         no,
                         style: TextStyle(
